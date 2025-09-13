@@ -23,12 +23,12 @@ headers = {
 
 yolo = YOLO("my_model.pt")
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
+#device = "cuda" if torch.cuda.is_available() else "cpu"
 clip, _, prep = open_clip.create_model_and_transforms(
     'ViT-L-14',
     pretrained='laion2b_s32b_b82k'
 )
-clip = clip.to(device)
+clip = clip.to("cpu")
 tokenizer = open_clip.get_tokenizer('ViT-L-14')
 
 client = QdrantClient(
@@ -76,7 +76,7 @@ class Search:
         clothes = self.__img_pre_pil(img_pil)
 
         for clothe in clothes:
-            query_image = self.prep(clothe).unsqueeze(0).to(device)
+            query_image = self.prep(clothe).unsqueeze(0).to("cpu")
 
             with torch.no_grad():
                 img_feat = self.clip.encode_image(query_image)
@@ -112,7 +112,7 @@ class Search:
                 )
 
     def text_search(self, text):
-        query = self.tokenizer([text]).to(device)
+        query = self.tokenizer([text]).to("cpu")
         with torch.no_grad():
             text_feat = self.clip.encode_text(query)
             text_feat /= text_feat.norm(dim=-1, keepdim=True)
