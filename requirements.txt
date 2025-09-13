@@ -1,0 +1,37 @@
+# main libraries
+numpy
+pandas
+matplotlib
+requests
+tqdm
+pillow
+webcolors
+scikit-learn
+
+
+# Computer Vision
+opencv-python-headless
+
+# Machine Learning / AI
+torch 
+torchvision
+torchaudio
+faiss-cpu
+
+# CLIP (OpenCLIP)
+open-clip-torch
+
+# YOLO
+ultralytics
+
+# API
+fastapi
+uvicorn[standard]
+python-multipart
+pydantic
+
+# Qdrant (Vector Database)
+qdrant-client
+
+# Utilities
+python-dotenv
